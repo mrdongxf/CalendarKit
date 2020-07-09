@@ -22,7 +22,7 @@ public final class TimelineView: UIView {
     return Date()
   }
 
-  private var eventViews = [EventView]()
+  public var eventViews = [EventView]()
   public private(set) var regularLayoutAttributes = [EventLayoutAttributes]()
   public private(set) var allDayLayoutAttributes = [EventLayoutAttributes]()
   

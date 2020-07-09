@@ -34,6 +34,12 @@ public final class DayView: UIView, TimelinePagerViewDelegate {
     }
   }
 
+  public var eventViews: [EventView]? {
+    get {
+      return timelinePagerView.currentTimeline?.timeline.eventViews
+    }
+  }
+  
   public var timelineScrollOffset: CGPoint {
     return timelinePagerView.timelineScrollOffset
   }

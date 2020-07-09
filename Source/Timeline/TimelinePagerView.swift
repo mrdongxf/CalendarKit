@@ -28,7 +28,7 @@ public final class TimelinePagerView: UIView, UIGestureRecognizerDelegate, UIScr
     return offset ?? CGPoint()
   }
   
-  private var currentTimeline: TimelineContainerController? {
+  public var currentTimeline: TimelineContainerController? {
     return pagingViewController.viewControllers?.first as? TimelineContainerController
   }
 
