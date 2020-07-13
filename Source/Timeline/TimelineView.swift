@@ -23,6 +23,7 @@ public final class TimelineView: UIView {
   }
 
   public var eventViews = [EventView]()
+  public var eventTitleViews = [EventTitleView]()
   public private(set) var regularLayoutAttributes = [EventLayoutAttributes]()
   public private(set) var allDayLayoutAttributes = [EventLayoutAttributes]()
   
@@ -281,7 +282,19 @@ public final class TimelineView: UIView {
     let attributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle,
                       NSAttributedString.Key.foregroundColor: self.style.timeColor,
                       NSAttributedString.Key.font: style.font] as [NSAttributedString.Key : Any]
-
+        // 分隔线
+        let context = UIGraphicsGetCurrentContext()
+        context?.saveGState()
+        context?.setStrokeColor(self.style.lineColor.cgColor)
+        //    context?.setStrokeColor(UIColor.red.cgColor)
+        context?.setLineWidth(onePixel)
+        context?.translateBy(x: 0, y: 0.5)
+        context?.beginPath()
+        context?.move(to: CGPoint(x: style.leftInset - 60, y: 0))
+        context?.addLine(to: CGPoint(x: style.leftInset - 60, y: 25 * style.verticalDiff))
+        context?.strokePath()
+        context?.restoreGState()
+    // timeline
     for (i, time) in times.enumerated() {
       let iFloat = CGFloat(i)
       let context = UIGraphicsGetCurrentContext()
@@ -290,7 +303,7 @@ public final class TimelineView: UIView {
       context?.setStrokeColor(self.style.lineColor.cgColor)
       context?.setLineWidth(onePixel)
       context?.translateBy(x: 0, y: 0.5)
-      let x: CGFloat = 53
+      let x: CGFloat = style.leftInset //53
       let y = style.verticalInset + iFloat * style.verticalDiff
       context?.beginPath()
       context?.move(to: CGPoint(x: x, y: y))
@@ -356,6 +369,15 @@ public final class TimelineView: UIView {
                                width: attributes.frame.width - style.eventGap,
                                height: attributes.frame.height - style.eventGap)
       eventView.updateWithDescriptor(event: descriptor)
+      // event title
+      let eventTitleView = eventTitleViews[idx]
+      if let title = eventView.descriptor?.title {
+          eventTitleView.title = title
+      }
+      eventTitleView.frame = CGRect(x: 5,
+                                    y: eventView.frame.minY,
+                                    width: style.leftInset - 60 - 2 * 5,
+                                    height: eventView.bounds.height)
     }
   }
   
@@ -440,18 +462,27 @@ public final class TimelineView: UIView {
   private func prepareEventViews() {
     pool.enqueue(views: eventViews)
     eventViews.removeAll()
+    eventTitleViews.removeAll()
     for _ in regularLayoutAttributes {
+       // EventView
       let newView = pool.dequeue()
       if newView.superview == nil {
         addSubview(newView)
       }
       eventViews.append(newView)
+      // EventTitleView
+      let eventTitleView = EventTitleView()
+      if eventTitleView.superview == nil {
+          addSubview(eventTitleView)
+      }
+      eventTitleViews.append(eventTitleView)
     }
   }
 
   public func prepareForReuse() {
     pool.enqueue(views: eventViews)
     eventViews.removeAll()
+    eventTitleViews.removeAll()
     setNeedsDisplay()
   }
 

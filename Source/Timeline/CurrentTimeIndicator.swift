@@ -3,7 +3,7 @@ import UIKit
 
 @objc public final class CurrentTimeIndicator: UIView {
   private let padding : CGFloat = 5
-  private let leftInset: CGFloat = 53
+  private let leftInset: CGFloat = 200 //53
 
   public var calendar: Calendar = Calendar.autoupdatingCurrent {
     didSet {
@@ -62,6 +62,7 @@ import UIKit
     timeLabel.rightAnchor.constraint(equalTo: line.leftAnchor, constant: -padding).isActive = true
     timeLabel.centerYAnchor.constraint(equalTo: line.centerYAnchor).isActive = true
     timeLabel.baselineAdjustment = .alignCenters
+    timeLabel.textAlignment = .right
     
     updateStyle(style)
     configureTimer()

@@ -2,6 +2,7 @@
 import UIKit
 
 public final class Event: EventDescriptor {
+  public var title = ""//"--- 今日任务 ---"
   public var startDate = Date()
   public var endDate = Date()
   public var isAllDay = false
