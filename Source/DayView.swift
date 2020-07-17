@@ -56,6 +56,15 @@ public final class DayView: UIView, TimelinePagerViewDelegate {
     }
   }
 
+  public var slideChangeDate: Bool {
+      get {
+          return timelinePagerView.slideChangeDate
+      }
+      set (value) {
+          timelinePagerView.slideChangeDate = value
+      }
+  }
+
   public let dayHeaderView: DayHeaderView
   public let timelinePagerView: TimelinePagerView
 

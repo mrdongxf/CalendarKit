@@ -33,7 +33,7 @@ public final class TimelinePagerView: UIView, UIGestureRecognizerDelegate, UIScr
   }
 
   public var autoScrollToFirstEvent = false
-
+  public var slideChangeDate = true
   private var pagingViewController = UIPageViewController(transitionStyle: .scroll,
                                                   navigationOrientation: .horizontal,
                                                   options: nil)
@@ -169,6 +169,9 @@ public final class TimelinePagerView: UIView, UIGestureRecognizerDelegate, UIScr
   override public func layoutSubviews() {
     super.layoutSubviews()
     pagingViewController.view.frame = bounds
+    if !slideChangeDate {
+        pagingViewController.dataSource = nil
+    }
   }
 
   private func updateTimeline(_ timeline: TimelineView) {
