@@ -3,6 +3,7 @@ import Foundation
 import UIKit
 
 public protocol EventDescriptor: AnyObject {
+  var inputTime: Date{get set} // 作为主键,用于删除更新
   var title: String {get set}
   var startDate: Date {get set}
   var endDate: Date {get set}
