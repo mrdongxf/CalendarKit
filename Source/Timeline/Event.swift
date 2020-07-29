@@ -4,6 +4,7 @@ import UIKit
 public final class Event: EventDescriptor {
   public var inputTime = Date()
   public var title = "" //"--- 今日任务 ---"
+  public var desc = ""
   public var startDate = Date()
   public var endDate = Date()
   public var isAllDay = false
