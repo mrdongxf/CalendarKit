@@ -29,14 +29,14 @@ open class EventTitleView: UIView {
         addSubview(titleLabel)
 //        contentScaleFactor = 1
 //        layer.contentsScale = 1
-//        contentMode = .redraw
+        contentMode = .redraw
         backgroundColor = .clear
         titleLabel.numberOfLines = 0
         titleLabel.baselineAdjustment = .alignCenters
         titleLabel.textAlignment = .center
         titleLabel.textColor = .black
         titleLabel.font.withSize(12)
-        titleLabel.backgroundColor = .clear
+        titleLabel.backgroundColor = .white //.clear
     }
     
     func myDrawRect(rect: CGRect) {
