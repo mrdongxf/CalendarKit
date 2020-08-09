@@ -459,9 +459,16 @@ public final class TimelineView: UIView {
     }
   }
 
+    private func clearAllEventTitles() {
+        for eventTitleView in eventTitleViews {
+            eventTitleView.title = ""
+        }
+    }
+    
   private func prepareEventViews() {
     pool.enqueue(views: eventViews)
     eventViews.removeAll()
+    clearAllEventTitles()
     eventTitleViews.removeAll()
     for _ in regularLayoutAttributes {
        // EventView
@@ -482,6 +489,7 @@ public final class TimelineView: UIView {
   public func prepareForReuse() {
     pool.enqueue(views: eventViews)
     eventViews.removeAll()
+    clearAllEventTitles()
     eventTitleViews.removeAll()
     setNeedsDisplay()
   }
