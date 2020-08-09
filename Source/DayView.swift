@@ -47,6 +47,16 @@ public final class DayView: UIView, TimelinePagerViewDelegate {
   private static let headerVisibleHeight: CGFloat = 88
   public var headerHeight: CGFloat = headerVisibleHeight
 
+    // 删除某个位置的title
+    public func removeTitleAt(at: Int) {
+//        print("count before:", timelinePagerView.currentTimeline?.timeline.eventTitleViews.count)
+        if (at < (timelinePagerView.currentTimeline?.timeline.eventTitleViews.count)!) {
+//            timelinePagerView.currentTimeline?.timeline.eventTitleViews[at].title = ""
+            timelinePagerView.currentTimeline?.timeline.eventTitleViews.remove(at: at)
+        }
+//        print("count after:", timelinePagerView.currentTimeline?.timeline.eventTitleViews.count)
+    }
+    
   public var autoScrollToFirstEvent: Bool {
     get {
       return timelinePagerView.autoScrollToFirstEvent
